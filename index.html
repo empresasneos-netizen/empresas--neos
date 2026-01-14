@@ -217,11 +217,13 @@
     .hidden{display:none}
     .skip-link{position:absolute;left:12px;top:12px;padding:8px 12px;background:#000;color:#fff;border-radius:6px;transform:translateY(-120%);transition:transform .16s}
     .skip-link:focus{transform:translateY(0);outline:3px solid #fff}
+    a:focus-visible, button:focus-visible, .btn:focus-visible{outline:3px solid rgba(14,165,183,0.9);outline-offset:3px}
+    .btn:focus{box-shadow:0 0 0 3px rgba(14,165,183,0.12)}
   </style>
 </head>
 <body>
   <a href="#maincontent" class="skip-link">Pular para o conteúdo</a>
-  <header>
+  <header role="banner">
     <div class="top">
       <a href="#inicio" class="brand" aria-label="Empresas Neos">
         <div class="logo" aria-hidden="true">
@@ -233,7 +235,7 @@
         </div>
       </a>
 
-      <nav aria-label="Main navigation">
+      <nav role="navigation" aria-label="Main navigation">
         <div class="navlinks" id="navlinks">
           <a href="#inicio" data-section="inicio" class="navlink">Início</a>
           <a href="#servicos" data-section="servicos" class="navlink">Serviços</a>
@@ -525,7 +527,7 @@ Um guia simples para pessoas reais começarem a ter controle hoje.</p>
     </section>
   </main>
 
-  <footer>
+  <footer role="contentinfo">
     <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
       <div>© <strong>Empresas Neos</strong> — <span data-i18n="footer_note">Soluções digitais para vender mais</span></div>
       <div class="small">Desenvolvido para uso imediato — sem backend</div>
