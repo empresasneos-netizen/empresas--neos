@@ -1,0 +1,791 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Empresas Neos</title>
+  <meta name="description" content="Criação de eBooks, conteúdo de jogos e bots para Instagram e WhatsApp." />
+  <style>
+    :root{
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --accent: #0ea5b7;
+      --accent-2: #7c3aed;
+      --muted: #475569;
+      --text: #0b1220;
+      --glass: rgba(11,18,32,0.04);
+      --border: rgba(11,18,32,0.06);
+      --radius:12px;
+      color-scheme: light;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:linear-gradient(180deg,#f6f8fb 0%, #eef2f6 100%);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+
+    /* Topbar */
+    header{
+      position:sticky;
+      top:0;
+      z-index:40;
+      backdrop-filter:saturate(120%) blur(6px);
+      background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.85));
+      border-bottom:1px solid var(--border);
+    }
+    .top{
+      max-width:1100px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      gap:16px;
+      padding:14px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      text-decoration:none;
+      color:inherit;
+    }
+    .logo{
+      width:44px;
+      height:44px;
+      border-radius:10px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      color:#ffffff;
+      box-shadow:0 6px 18px rgba(12,20,30,0.06);
+      overflow:hidden;
+    }
+    .logo img{width:100%;height:100%;object-fit:cover;display:block;border-radius:10px}
+    .brand h1{font-size:16px;margin:0}
+    nav{
+      margin-left:8px;
+      display:flex;
+      gap:8px;
+      align-items:center;
+      flex:1;
+    }
+    .navlinks{
+      display:flex;
+      gap:6px;
+      flex-wrap:wrap;
+    }
+    .navlinks a{
+      color:var(--muted);
+      text-decoration:none;
+      padding:8px 12px;
+      border-radius:8px;
+      font-weight:600;
+      font-size:14px;
+      background:transparent;
+    }
+    .navlinks a.active{
+      background:var(--glass);
+      color:var(--text);
+      box-shadow:0 4px 12px rgba(11,18,32,0.04) inset;
+    }
+
+    .actions{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      margin-left:auto;
+    }
+    .btn{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      padding:8px 12px;
+      border-radius:10px;
+      border:1px solid var(--border);
+      background:linear-gradient(180deg, rgba(255,255,255,0.95), transparent);
+      color:var(--text);
+      text-decoration:none;
+      font-weight:700;
+      cursor:pointer;
+      font-size:14px;
+    }
+    .btn.primary{
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      color:#fff;
+      border:none;
+      box-shadow:0 8px 24px rgba(124,58,237,0.12);
+    }
+    .langswitch{
+      display:flex;
+      gap:6px;
+      border-radius:8px;
+      overflow:hidden;
+      border:1px solid var(--border);
+      background:#fff;
+    }
+    .langswitch button{
+      padding:6px 8px;
+      border:0;
+      background:transparent;
+      color:var(--muted);
+      cursor:pointer;
+      font-weight:700;
+    }
+    .langswitch button.active{color:var(--text);background:var(--glass)}
+
+    /* Main */
+    main{max-width:1100px;margin:28px auto;padding:0 16px 80px}
+    .hero{
+      display:grid;
+      grid-template-columns:1fr 420px;
+      gap:24px;
+      align-items:center;
+      margin-bottom:22px;
+    }
+    .hero-card{
+      background:var(--card);
+      padding:26px;
+      border-radius:var(--radius);
+      box-shadow:0 8px 24px rgba(11,18,32,0.06);
+      border:1px solid var(--border);
+    }
+    .hero h2{margin:0 0 8px 0;font-size:26px}
+    .hero p{margin:0 0 16px;color:var(--muted)}
+    .hero .cta{display:flex;gap:10px;flex-wrap:wrap}
+    .small{
+      font-size:13px;color:var(--muted)
+    }
+
+    /* Grid Cards */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+      margin-top:12px;
+    }
+    .card{
+      background:var(--card);
+      padding:18px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      box-shadow:0 6px 18px rgba(11,18,32,0.03);
+    }
+    .card h3{margin:0 0 8px 0}
+    .card p{margin:0 0 12px;color:var(--muted);font-size:14px}
+    .card .foot{display:flex;justify-content:space-between;align-items:center}
+    .tag{font-size:12px;color:var(--muted);padding:6px 8px;border-radius:999px;background:rgba(11,18,32,0.03) }
+
+    .product-row{display:flex;justify-content:space-between;align-items:center;margin-top:8px;gap:8px}
+    .product-info{display:flex;flex-direction:column}
+    .product-name{font-weight:700}
+    .product-price{color:var(--muted);font-size:14px}
+
+    /* Contact */
+    .contact-grid{display:grid;grid-template-columns:1fr 320px;gap:16px;margin-top:12px}
+    .contact-card{padding:16px;border-radius:12px;background:var(--card);border:1px solid var(--border);box-shadow:0 6px 18px rgba(11,18,32,0.03)}
+    .socials{display:flex;gap:8px;flex-wrap:wrap}
+
+    footer{max-width:1100px;margin:40px auto 60px;padding:0 16px;color:var(--muted);font-size:13px}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr; padding-bottom:6px}
+      .grid{grid-template-columns:repeat(2,1fr)}
+      .contact-grid{grid-template-columns:1fr}
+    }
+    @media (max-width:560px){
+      .navlinks{display:none}
+      .brand h1{font-size:14px}
+      .grid{grid-template-columns:1fr}
+      .top{padding:12px}
+      .logo{width:38px;height:38px}
+      .hero h2{font-size:20px}
+    }
+
+    /* simple anchor highlight for current section */
+    section{scroll-margin-top:88px;padding-top:6px}
+    .hidden{display:none}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="top">
+      <a href="#inicio" class="brand" aria-label="Empresas Neos">
+        <div class="logo" aria-hidden="true">
+          <img src="logo.png" alt="Empresas Neos logo" id="logoImg" />
+        </div>
+        <div>
+          <h1>Empresas Neos</h1>
+          <div class="small" data-i18n="tagline">Soluções digitais que vendem</div>
+        </div>
+      </a>
+
+      <nav aria-label="Main navigation">
+        <div class="navlinks" id="navlinks">
+          <a href="#inicio" data-section="inicio" class="navlink">Início</a>
+          <a href="#servicos" data-section="servicos" class="navlink">Serviços</a>
+          <a href="#ebooks" data-section="ebooks" class="navlink">eBooks</a>
+          <a href="#jogos" data-section="jogos" class="navlink">Jogos</a>
+          <a href="#bots" data-section="bots" class="navlink">Bots</a>
+          <a href="#contato" data-section="contato" class="navlink">Contato</a>
+        </div>
+      </nav>
+
+      <div class="actions">
+        <div class="langswitch" role="tablist" aria-label="Seleção de idioma">
+          <button id="lang-pt" data-lang="pt" class="active">PT</button>
+          <button id="lang-en" data-lang="en">EN</button>
+        </div>
+        <a id="whatsBtn" class="btn primary" href="https://wa.me/553491524802" target="_blank" rel="noopener">
+          WhatsApp
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="inicio" class="hero" aria-labelledby="hero-title">
+      <div class="hero-card">
+        <h2 id="hero-title" data-i18n="hero_title">Transforme sua presença digital e venda mais</h2>
+        <p data-i18n="hero_sub">Criamos eBooks, conteúdos de jogos e bots que convertem seguidores em clientes. Entregamos soluções práticas e prontas para usar.</p>
+        <div class="cta">
+          <a class="btn primary wa-btn" data-wa-key="general" target="_blank" rel="noopener" data-i18n="cta_contact">Fale no WhatsApp</a>
+          <a class="btn" id="cta-inst" href="https://www.instagram.com/empresasneos/" target="_blank" rel="noopener" data-i18n="cta_inst">Visite no Instagram</a>
+        </div>
+        <p class="small" style="margin-top:12px" data-i18n="hero_note">Sem contrato longo — resultados rápidos e suporte prático.</p>
+      </div>
+
+      <aside class="hero-card" aria-label="Destaques">
+        <h3 data-i18n="highlights_title">Serviços em destaque</h3>
+        <div style="margin-top:10px">
+          <div style="margin-bottom:10px">
+            <strong data-i18n="h1_title">eBooks Profissionais</strong>
+            <div class="small" data-i18n="h1_sub">Conteúdo que posiciona sua marca e gera leads.</div>
+          </div>
+          <div style="margin-bottom:10px">
+            <strong data-i18n="h2_title">Conteúdo de Jogos</strong>
+            <div class="small" data-i18n="h2_sub">Pacotes prontos para monetizar comunidades gamers.</div>
+          </div>
+          <div>
+            <strong data-i18n="h3_title">Bots Inteligentes</strong>
+            <div class="small" data-i18n="h3_sub">Automatize vendas e atendimento no Instagram e WhatsApp.</div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="servicos" aria-labelledby="servicos-title">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+        <h2 id="servicos-title" data-i18n="services_title">Serviços</h2>
+        <div class="small" data-i18n="services_sub">Soluções completas para vender mais online</div>
+      </div>
+      <div class="grid" style="margin-top:14px">
+        <div class="card">
+          <h3 data-i18n="s_card1_title">Criação de eBooks</h3>
+          <p data-i18n="s_card1_text">Roteiro, design e produto final prontos para venda — ideal para captar leads e monetizar expertise.</p>
+          <div class="foot">
+            <span class="tag" data-i18n="price_from">A partir de</span>
+            <strong data-i18n="price_value">R$ 15,99</strong>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 data-i18n="s_card2_title">Conteúdo para Jogos</h3>
+          <p data-i18n="s_card2_text">Guias, pacotes digitais e assets para vendas em lojas, Twitch e redes sociais.</p>
+          <div class="foot">
+            <span class="tag" data-i18n="custom">Conteúdo Personalizado</span>
+            <strong data-i18n="s_card2_cta">Peça um orçamento</strong>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 data-i18n="s_card3_title">Chatbot para Instagram</h3>
+          <p data-i18n="s_card3_text">Fluxos prontos para qualificar leads e aumentar conversões diretamente no Instagram.</p>
+          <div class="foot">
+            <span class="tag">Automação</span>
+            <strong data-i18n="s_card3_cta">Demonstração</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="ebooks" aria-labelledby="ebooks-title" style="margin-top:22px">
+      <h2 id="ebooks-title" data-i18n="ebooks_title">eBooks</h2>
+      <p class="small" data-i18n="ebooks_sub">E-books prontos para venda — design atraente e copy otimizada para conversão.</p>
+      <div class="grid" style="margin-top:12px">
+        <div class="card">
+          <h3 data-i18n="ebook1_title">Mente Blindada</h3>
+          <p data-i18n="ebook1_text">Você sente que tenta, mas não sai do lugar?
+Muitas vezes, o maior bloqueio está na própria mente.
+
+Este eBook foi criado para quem deseja mudar de verdade.
+De forma simples e prática, você vai aprender a:
+
+Identificar pensamentos sabotadores
+
+Controlar melhor as emoções
+
+Criar disciplina mesmo sem motivação
+
+Fortalecer autoestima e autoconfiança
+
+Vencer a procrastinação
+
+Construir uma mentalidade forte e consistente.</p>
+          <div class="foot">
+            <span class="tag">Instantâneo</span>
+            <div style="display:flex;gap:8px;align-items:center">
+              <strong data-i18n="ebook1_price">R$ 15,99</strong>
+              <a class="btn wa-btn" data-wa-key="ebook1" target="_blank" rel="noopener" data-i18n="ebook_buy">Solicitar</a>
+            </div>
+          </div>
+          <div class="small" style="margin-top:8px">WhatsApp: <a href="https://wa.me/553491524802" target="_blank" rel="noopener">+55 34 9152-4802</a></div>
+        </div>
+
+        <div class="card">
+          <h3 data-i18n="ebook2_title">Dinheiro Sem Mentiras: o básico que ninguém te ensinou</h3>
+          <p data-i18n="ebook2_text">Este eBook não promete enriquecer você.
+Ele promete algo mais importante: clareza.
+
+Se o dinheiro some, o mês aperta ou você nunca conseguiu se organizar, este guia é para você.
+
+Você vai aprender:
+✔️ Como controlar seu dinheiro
+✔️ Evitar erros que quebram o orçamento
+✔️ Sair das dívidas sem desespero
+✔️ Criar reserva mesmo ganhando pouco
+
+Sem promessas irreais.
+Um guia simples para pessoas reais começarem a ter controle hoje.</p>
+          <div class="foot">
+            <span class="tag">Popular</span>
+            <div style="display:flex;gap:8px;align-items:center">
+              <strong data-i18n="ebook2_price">R$ 15,99</strong>
+              <a class="btn wa-btn" data-wa-key="ebook2" target="_blank" rel="noopener" data-i18n="ebook_buy">Solicitar</a>
+            </div>
+          </div>
+          <div class="small" style="margin-top:8px">WhatsApp: <a href="https://wa.me/553491524802" target="_blank" rel="noopener">+55 34 9152-4802</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="jogos" aria-labelledby="jogos-title" style="margin-top:22px">
+      <h2 id="jogos-title" data-i18n="games_title">Jogos</h2>
+      <p class="small" data-i18n="games_sub">Conteúdos e pacotes para jogadores e criadores — monetize comunidade e streams.</p>
+      <div class="grid" style="margin-top:12px">
+        <div class="card">
+          <h3 data-i18n="game1_title">Valorant</h3>
+          <p data-i18n="game1_text">Pacotes e ferramentas para melhorar performance e conteúdo de stream.</p>
+          <div class="foot">
+            <span class="tag">Serviço</span>
+            <a class="btn wa-btn" data-wa-key="valorant" target="_blank" rel="noopener" data-i18n="chat_btn">Conversar</a>
+          </div>
+          <div class="small" style="margin-top:8px">WhatsApp: <a href="https://wa.me/553491524802" target="_blank" rel="noopener">+55 34 9152-4802</a></div>
+        </div>
+
+        <div class="card">
+          <h3 data-i18n="game2_title">CS:GO2</h3>
+          <p data-i18n="game2_text">Conteúdos e scripts para jogadores competitivos e criadores de conteúdo.</p>
+          <div class="foot">
+            <span class="tag">Serviço</span>
+            <a class="btn wa-btn" data-wa-key="csgo2" target="_blank" rel="noopener" data-i18n="chat_btn">Conversar</a>
+          </div>
+          <div class="small" style="margin-top:8px">WhatsApp: <a href="https://wa.me/553491524802" target="_blank" rel="noopener">+55 34 9152-4802</a></div>
+        </div>
+
+        <div class="card">
+          <h3 data-i18n="game3_title">Blood Strike</h3>
+          <p data-i18n="game3_text">Pacotes e ferramentas focadas em performance e monetização.</p>
+
+          <div class="product-row">
+            <div class="product-info">
+              <div class="product-name" data-i18n="blood_macro_title">Macro para mouse</div>
+              <div class="product-price" data-i18n="blood_macro_price">R$ 20,99</div>
+            </div>
+            <div style="display:flex;gap:8px;align-items:center">
+              <a class="btn wa-btn" data-wa-key="blood_macro" target="_blank" rel="noopener" data-i18n="chat_btn">Conversar</a>
+            </div>
+          </div>
+
+          <div class="product-row">
+            <div class="product-info">
+              <div class="product-name" data-i18n="blood_aim_title">AimColor Assist</div>
+              <div class="product-price" data-i18n="blood_aim_price">R$ 25,00</div>
+            </div>
+            <div style="display:flex;gap:8px;align-items:center">
+              <a class="btn wa-btn" data-wa-key="blood_aim" target="_blank" rel="noopener" data-i18n="chat_btn">Conversar</a>
+            </div>
+          </div>
+
+          <div class="small" style="margin-top:8px">WhatsApp: <a href="https://wa.me/553491524802" target="_blank" rel="noopener">+55 34 9152-4802</a></div>
+        </div>
+
+        <div class="card">
+          <h3 data-i18n="game4_title">Farlight 84</h3>
+          <p data-i18n="game4_text">Kits e ferramentas para performance e monetização em servidores e streams.</p>
+
+          <div class="product-row">
+            <div class="product-info">
+              <div class="product-name" data-i18n="farlight_macro_title">Macro para mouse</div>
+              <div class="product-price" data-i18n="farlight_macro_price">R$ 20,99</div>
+            </div>
+            <div style="display:flex;gap:8px;align-items:center">
+              <a class="btn wa-btn" data-wa-key="farlight_macro" target="_blank" rel="noopener" data-i18n="chat_btn">Conversar</a>
+            </div>
+          </div>
+
+          <div class="product-row">
+            <div class="product-info">
+              <div class="product-name" data-i18n="farlight_aim_title">AimColor Assist</div>
+              <div class="product-price" data-i18n="farlight_aim_price">R$ 25,00</div>
+            </div>
+            <div style="display:flex;gap:8px;align-items:center">
+              <a class="btn wa-btn" data-wa-key="farlight_aim" target="_blank" rel="noopener" data-i18n="chat_btn">Conversar</a>
+            </div>
+          </div>
+
+          <div class="small" style="margin-top:8px">WhatsApp: <a href="https://wa.me/553491524802" target="_blank" rel="noopener">+55 34 9152-4802</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="bots" aria-labelledby="bots-title" style="margin-top:22px">
+      <h2 id="bots-title" data-i18n="bots_title">Bots</h2>
+      <p class="small" data-i18n="bots_sub">Automação que vende: Instagram e WhatsApp com fluxo inteligente.</p>
+      <div class="grid" style="margin-top:12px">
+        <div class="card">
+          <h3 data-i18n="bot1_title">Bot WhatsApp</h3>
+          <p data-i18n="bot1_text">Respostas automáticas, checkout simplificado e integração com mensagens de vendas.</p>
+          <div class="foot"><span class="tag">WhatsApp</span><a class="btn wa-btn" data-wa-key="bot_whats" href="#" target="_blank" rel="noopener" data-i18n="bot1_cta">Conversar</a></div>
+        </div>
+        <div class="card">
+          <h3 data-i18n="bot2_title">Bot Instagram</h3>
+          <p data-i18n="bot2_text">Mensagens automáticas, qualificação e links de venda dentro do Instagram.</p>
+          <div class="foot"><span class="tag">Instagram</span><a class="btn" href="https://www.instagram.com/empresasneos/" target="_blank" rel="noopener" data-i18n="bot2_cta">Ver demo</a></div>
+        </div>
+        <div class="card">
+          <h3 data-i18n="bot3_title">Integrações</h3>
+          <p data-i18n="bot3_text">Integração simples com sistemas de pagamento e planilhas para gestão de pedidos.</p>
+          <div class="foot"><span class="tag">Conectável</span><a class="btn wa-btn" data-wa-key="bot_integrations" href="#" target="_blank" rel="noopener" data-i18n="bot3_cta">Saber mais</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato" aria-labelledby="contato-title" style="margin-top:22px">
+      <h2 id="contato-title" data-i18n="contact_title">Contato</h2>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <p data-i18n="contact_text">Pronto para vender mais? Envie uma mensagem e responderemos em poucas horas.</p>
+          <div style="margin-top:12px" class="socials">
+            <a class="btn primary wa-btn" data-wa-key="general" target="_blank" rel="noopener">WhatsApp</a>
+            <a class="btn" href="https://www.instagram.com/empresasneos/" target="_blank" rel="noopener">Instagram</a>
+            <a class="btn" href="mailto:contato@empresasneos.com.br">Email</a>
+          </div>
+          <div style="margin-top:12px" class="small"><strong>Whats:</strong> +55 34 9152-4802</div>
+          <div class="small">Instagram: <a href="https://www.instagram.com/empresasneos/" target="_blank" rel="noopener">empresasneos</a></div>
+        </div>
+
+        <aside class="contact-card">
+          <h4 data-i18n="quote_title">Solicite um orçamento</h4>
+          <p class="small" data-i18n="quote_text">Descreva brevemente seu projeto e o canal desejado (eBook, Games, Instagram/WhatsApp).</p>
+          <a class="btn primary wa-btn" data-wa-key="general" target="_blank" rel="noopener" style="margin-top:10px" data-i18n="quote_btn">Enviar via WhatsApp</a>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
+      <div>© <strong>Empresas Neos</strong> — <span data-i18n="footer_note">Soluções digitais para vender mais</span></div>
+      <div class="small">Desenvolvido para uso imediato — sem backend</div>
+    </div>
+  </footer>
+
+  <script>
+    const phone = '553491524802';
+
+    const TRANSLATIONS = {
+      pt: {
+        tagline: "Soluções digitais que vendem",
+        hero_title: "Transforme sua presença digital e venda mais",
+        hero_sub: "Criamos eBooks, conteúdos de jogos e bots que convertem seguidores em clientes. Entregamos soluções práticas e prontas para usar.",
+        cta_contact: "Fale no WhatsApp",
+        cta_inst: "Visite no Instagram",
+        hero_note: "Sem contrato longo — resultados rápidos e suporte prático.",
+        highlights_title: "Serviços em destaque",
+        h1_title: "eBooks Profissionais",
+        h1_sub: "Conteúdo que posiciona sua marca e gera leads.",
+        h2_title: "Conteúdo de Jogos",
+        h2_sub: "Pacotes prontos para monetizar comunidades gamers.",
+        h3_title: "Bots Inteligentes",
+        h3_sub: "Automatize vendas e atendimento no Instagram e WhatsApp.",
+        services_title: "Serviços",
+        services_sub: "Soluções completas para vender mais online",
+        s_card1_title: "Criação de eBooks",
+        s_card1_text: "Roteiro, design e produto final prontos para venda — ideal para captar leads e monetizar expertise.",
+        price_from: "A partir de",
+        price_value: "R$ 15,99",
+        s_card2_title: "Conteúdo para Jogos",
+        s_card2_text: "Guias, pacotes digitais e assets para vendas em lojas, Twitch e redes sociais.",
+        custom: "Conteúdo Personalizado",
+        s_card3_title: "Chatbot para Instagram",
+        s_card3_text: "Fluxos prontos para qualificar leads e aumentar conversões diretamente no Instagram.",
+        s_card3_cta: "Demonstração",
+        ebooks_title: "eBooks",
+        ebooks_sub: "E-books prontos para venda — design atraente e copy otimizada para conversão.",
+        ebook1_title: "Mente Blindada",
+        ebook1_text: `Você sente que tenta, mas não sai do lugar?
+Muitas vezes, o maior bloqueio está na própria mente.
+
+Este eBook foi criado para quem deseja mudar de verdade.
+De forma simples e prática, você vai aprender a:
+
+Identificar pensamentos sabotadores
+
+Controlar melhor as emoções
+
+Criar disciplina mesmo sem motivação
+
+Fortalecer autoestima e autoconfiança
+
+Vencer a procrastinação
+
+Construir uma mentalidade forte e consistente.`,
+        ebook1_price: "R$ 15,99",
+        ebook2_title: "Dinheiro Sem Mentiras: o básico que ninguém te ensinou",
+        ebook2_text: `Este eBook não promete enriquecer você.
+Ele promete algo mais importante: clareza.
+
+Se o dinheiro some, o mês aperta ou você nunca conseguiu se organizar, este guia é para você.
+
+Você vai aprender:
+✔️ Como controlar seu dinheiro
+✔️ Evitar erros que quebram o orçamento
+✔️ Sair das dívidas sem desespero
+✔️ Criar reserva mesmo ganhando pouco
+
+Sem promessas irreais.
+Um guia simples para pessoas reais começarem a ter controle hoje.`,
+        ebook2_price: "R$ 15,99",
+        ebook_buy: "Solicitar",
+        games_title: "Jogos",
+        games_sub: "Conteúdos e pacotes para jogadores e criadores — monetize comunidade e streams.",
+        game1_title: "Valorant",
+        game1_text: "Pacotes e ferramentas para melhorar performance e conteúdo de stream.",
+        game2_title: "CS:GO2",
+        game2_text: "Conteúdos e scripts para jogadores competitivos e criadores de conteúdo.",
+        game3_title: "Blood Strike",
+        game3_text: "Pacotes e ferramentas focadas em performance e monetização.",
+        game4_title: "Farlight 84",
+        game4_text: "Kits e ferramentas para performance e monetização em servidores e streams.",
+        blood_macro_title: "Macro para mouse",
+        blood_macro_price: "R$ 20,99",
+        blood_aim_title: "AimColor Assist",
+        blood_aim_price: "R$ 25,00",
+        farlight_macro_title: "Macro para mouse",
+        farlight_macro_price: "R$ 20,99",
+        farlight_aim_title: "AimColor Assist",
+        farlight_aim_price: "R$ 25,00",
+        chat_btn: "Conversar",
+        bots_title: "Bots",
+        bots_sub: "Automação que vende: Instagram e WhatsApp com fluxo inteligente.",
+        bot1_title: "Bot WhatsApp",
+        bot1_text: "Respostas automáticas, checkout simplificado e integração com mensagens de vendas.",
+        bot1_cta: "Conversar",
+        bot2_title: "Bot Instagram",
+        bot2_text: "Mensagens automáticas, qualificação e links de venda dentro do Instagram.",
+        bot2_cta: "Ver demo",
+        bot3_title: "Integrações",
+        bot3_text: "Integração simples com sistemas de pagamento e planilhas para gestão de pedidos.",
+        bot3_cta: "Saber mais",
+        contact_title: "Contato",
+        contact_text: "Pronto para vender mais? Envie uma mensagem e responderemos em poucas horas.",
+        quote_title: "Solicite um orçamento",
+        quote_text: "Descreva brevemente seu projeto e o canal desejado (eBook, Games, Instagram/WhatsApp).",
+        quote_btn: "Enviar via WhatsApp",
+        footer_note: "Soluções digitais para vender mais",
+        wa_general: "Olá, quero mais informações sobre os serviços da Empresas Neos.",
+        wa_ebook1: "Olá, quero comprar o eBook 'Mente Blindada' (R$ 15,99). Como faço o pagamento?",
+        wa_ebook2: "Olá, quero comprar o eBook 'Dinheiro Sem Mentiras' (R$ 15,99). Como faço o pagamento?",
+        wa_valorant: "Olá, quero informações sobre pacotes para Valorant.",
+        wa_csgo2: "Olá, quero informações sobre pacotes para CS:GO2.",
+        wa_blood_macro: "Olá, quero comprar 'Macro para mouse' para Blood Strike (R$ 20,99).",
+        wa_blood_aim: "Olá, quero comprar 'AimColor Assist' para Blood Strike (R$ 25,00).",
+        wa_farlight_macro: "Olá, quero comprar 'Macro para mouse' para Farlight 84 (R$ 20,99).",
+        wa_farlight_aim: "Olá, quero comprar 'AimColor Assist' para Farlight 84 (R$ 25,00).",
+        wa_bot_whats: "Olá, quero informações sobre o Bot WhatsApp.",
+        wa_bot_integrations: "Olá, quero saber sobre integrações."
+      },
+      en: {
+        tagline: "Digital solutions that sell",
+        hero_title: "Transform your digital presence and sell more",
+        hero_sub: "We create eBooks, game content and bots that convert followers into customers. Practical, ready-to-use solutions.",
+        cta_contact: "Chat on WhatsApp",
+        cta_inst: "Visit on Instagram",
+        hero_note: "No long contracts — fast results and practical support.",
+        highlights_title: "Featured services",
+        h1_title: "Professional eBooks",
+        h1_sub: "Content that positions your brand and generates leads.",
+        h2_title: "Game Content",
+        h2_sub: "Ready packages to monetize gamer communities.",
+        h3_title: "Smart Bots",
+        h3_sub: "Automate sales and support on Instagram and WhatsApp.",
+        services_title: "Services",
+        services_sub: "Complete solutions to sell more online",
+        s_card1_title: "eBook Creation",
+        s_card1_text: "Script, design and final product ready to sell — ideal to capture leads and monetize expertise.",
+        price_from: "From",
+        price_value: "R$ 15.99",
+        s_card2_title: "Game Content",
+        s_card2_text: "Guides, digital bundles and assets for stores, Twitch and social platforms.",
+        custom: "Custom content",
+        s_card3_title: "Instagram Chatbot",
+        s_card3_text: "Ready flows to qualify leads and increase conversions directly on Instagram.",
+        s_card3_cta: "Demo",
+        ebooks_title: "eBooks",
+        ebooks_sub: "Ready-to-sell eBooks — attractive design and copy optimized for conversion.",
+        ebook1_title: "Shielded Mind",
+        ebook1_text: `Do you feel like you're trying but not moving forward?
+Often, the biggest block is in the mind itself.
+
+This eBook was created for those who want to truly change.
+In a simple and practical way, you'll learn to:
+
+Identify self-sabotaging thoughts
+
+Better control your emotions
+
+Create discipline even without motivation
+
+Strengthen self-esteem and confidence
+
+Overcome procrastination
+
+Build a strong and consistent mindset.`,
+        ebook1_price: "R$ 15.99",
+        ebook2_title: "Money Without Lies: the basics no one taught you",
+        ebook2_text: `This eBook does not promise to make you rich.
+It promises something more important: clarity.
+
+If money disappears, the month gets tight or you never managed to organize yourself, this guide is for you.
+
+You'll learn:
+✔️ How to control your money
+✔️ Avoid mistakes that break the budget
+✔️ Get out of debt without panic
+✔️ Build savings even on a small income
+
+No unrealistic promises.
+A simple guide for real people to start taking control today.`,
+        ebook2_price: "R$ 15.99",
+        ebook_buy: "Request",
+        games_title: "Games",
+        games_sub: "Content and packages for players and creators — monetize communities and streams.",
+        game1_title: "Valorant",
+        game1_text: "Packages and tools to improve performance and stream content.",
+        game2_title: "CS:GO2",
+        game2_text: "Content and scripts for competitive players and content creators.",
+        game3_title: "Blood Strike",
+        game3_text: "Packages and tools focused on performance and monetization.",
+        game4_title: "Farlight 84",
+        game4_text: "Kits and tools for performance and monetization on servers and streams.",
+        blood_macro_title: "Mouse Macro",
+        blood_macro_price: "R$ 20.99",
+        blood_aim_title: "AimColor Assist",
+        blood_aim_price: "R$ 25.00",
+        farlight_macro_title: "Mouse Macro",
+        farlight_macro_price: "R$ 20.99",
+        farlight_aim_title: "AimColor Assist",
+        farlight_aim_price: "R$ 25.00",
+        chat_btn: "Chat",
+        bots_title: "Bots",
+        bots_sub: "Automation that sells: Instagram and WhatsApp with intelligent flows.",
+        bot1_title: "WhatsApp Bot",
+        bot1_text: "Auto-replies, simplified checkout and integration with sales messages.",
+        bot1_cta: "Chat",
+        bot2_title: "Instagram Bot",
+        bot2_text: "Auto messages, qualification and sales links inside Instagram.",
+        bot2_cta: "See demo",
+        bot3_title: "Integrations",
+        bot3_text: "Easy integration with payment systems and spreadsheets for order management.",
+        bot3_cta: "Learn more",
+        contact_title: "Contact",
+        contact_text: "Ready to sell more? Send a message and we'll reply within hours.",
+        quote_title: "Request a quote",
+        quote_text: "Briefly describe your project and the desired channel (eBook, Games, Instagram/WhatsApp).",
+        quote_btn: "Send via WhatsApp",
+        footer_note: "Digital solutions to sell more",
+        wa_general: "Hi, I'd like more info about Empresas Neos services.",
+        wa_ebook1: "Hi, I'd like to buy the eBook 'Shielded Mind' (R$ 15.99). How can I pay?",
+        wa_ebook2: "Hi, I'd like to buy the eBook 'Money Without Lies' (R$ 15.99). How can I pay?",
+        wa_valorant: "Hi, I'd like info about Valorant packages.",
+        wa_csgo2: "Hi, I'd like info about CS:GO2 packages.",
+        wa_blood_macro: "Hi, I'd like to buy 'Mouse Macro' for Blood Strike (R$ 20.99).",
+        wa_blood_aim: "Hi, I'd like to buy 'AimColor Assist' for Blood Strike (R$ 25.00).",
+        wa_farlight_macro: "Hi, I'd like to buy 'Mouse Macro' for Farlight 84 (R$ 20.99).",
+        wa_farlight_aim: "Hi, I'd like to buy 'AimColor Assist' for Farlight 84 (R$ 25.00).",
+        wa_bot_whats: "Hi, I'd like info about the WhatsApp Bot.",
+        wa_bot_integrations: "Hi, I'd like info about integrations."
+      }
+    };
+
+    function applyLang(lang){
+      const map = TRANSLATIONS[lang] || TRANSLATIONS.pt;
+      document.querySelectorAll('[data-i18n]').forEach(el=>{
+        const key = el.getAttribute('data-i18n');
+        if(!key) return;
+        const val = map[key];
+        if(val !== undefined){
+          el.textContent = val;
+        }
+      });
+      const navMap = {
+        pt: ['Início','Serviços','eBooks','Jogos','Bots','Contato'],
+        en: ['Home','Services','eBooks','Games','Bots','Contact']
+      };
+      document.querySelectorAll('.navlink').forEach((a,i)=> a.textContent = navMap[lang][i]);
+
+      document.querySelectorAll('.langswitch button').forEach(b=> b.classList.toggle('active', b.dataset.lang === lang));
+      document.documentElement.lang = (lang === 'pt') ? 'pt-BR' : 'en';
+      localStorage.setItem('neos_lang', lang);
+      updateWaLinks(map);
+    }
+
+    function updateWaLinks(map) {
+      document.querySelectorAll('.wa-btn').forEach(a=>{
+        const key = a.getAttribute('data-wa-key');
+        if(!key) return;
+        const msgKey = 'wa_' + key;
+        const text = map[msgKey] || map['wa_general'] || '';
+        const href = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+        a.href = href;
+      });
+      document.querySelectorAll('a[href^="https://wa.me/553491524802"]').forEach(a=> a.href = `https://wa.me/${phone}`);
+    }
+
+    const initialLang = localStorage.getItem('neos_lang') || (navigator.language && navigator.language.startsWith('en') ? 'en' : 'pt');
+    applyLang(initialLang);
+
+    document.querySelectorAll('.langswitch button').forEach(btn=> btn.addEventListener('click', ()=> applyLang(btn.dataset.lang)));
+
+    function setActiveFromHash(){
+      const hash = (location.hash || '#inicio').replace('#','');
+      document.querySelectorAll('.navlink').forEach(a=> a.classList.toggle('active', a.dataset.section === hash));
+      const el = document.getElementById(hash);
+      if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+    }
+    window.addEventListener('hashchange', setActiveFromHash);
+    window.addEventListener('load', setActiveFromHash);
+    document.querySelectorAll('.navlink').forEach(a=> a.addEventListener('click', ()=> setTimeout(setActiveFromHash,50)));
+    document.querySelectorAll('.langswitch button').forEach(b=> b.addEventListener('keydown', e=> { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); b.click(); }}));
+    if(!location.hash) { history.replaceState(null, '', '#inicio'); setActiveFromHash(); }
+  </script>
+</body>
+</html>
