@@ -215,9 +215,12 @@
     /* simple anchor highlight for current section */
     section{scroll-margin-top:88px;padding-top:6px}
     .hidden{display:none}
+    .skip-link{position:absolute;left:12px;top:12px;padding:8px 12px;background:#000;color:#fff;border-radius:6px;transform:translateY(-120%);transition:transform .16s}
+    .skip-link:focus{transform:translateY(0);outline:3px solid #fff}
   </style>
 </head>
 <body>
+  <a href="#maincontent" class="skip-link">Pular para o conteúdo</a>
   <header>
     <div class="top">
       <a href="#inicio" class="brand" aria-label="Empresas Neos">
@@ -253,7 +256,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="maincontent">
     <section id="inicio" class="hero" aria-labelledby="hero-title">
       <div class="hero-card">
         <h2 id="hero-title" data-i18n="hero_title">Transforme sua presença digital e venda mais</h2>
@@ -386,7 +389,10 @@ Um guia simples para pessoas reais começarem a ter controle hoje.</p>
       <p class="small" data-i18n="games_sub">Conteúdos e pacotes para jogadores e criadores — monetize comunidade e streams.</p>
       <div class="grid" style="margin-top:12px">
         <div class="card">
-          <img src="images/opt/vava.png" srcset="images/opt/vava.png 1x, images/opt/vava@2x.png 2x" alt="Valorant" class="game-img" loading="lazy" width="88" height="88" />
+          <picture>
+            <source type="image/webp" srcset="images/opt/vava.webp 1x, images/opt/vava@2x.webp 2x">
+            <img src="images/opt/vava.png" srcset="images/opt/vava.png 1x, images/opt/vava@2x.png 2x" alt="Capa do serviço Valorant" class="game-img" loading="lazy" width="88" height="88" />
+          </picture>
           <h3 data-i18n="game1_title">Valorant</h3>
           <p data-i18n="game1_text">Pacotes e ferramentas para melhorar performance e conteúdo de stream.</p>
           <div class="foot">
@@ -397,7 +403,10 @@ Um guia simples para pessoas reais começarem a ter controle hoje.</p>
         </div>
 
         <div class="card">
-          <img src="images/opt/cs2.png" srcset="images/opt/cs2.png 1x, images/opt/cs2@2x.png 2x" alt="CS:GO2" class="game-img" loading="lazy" width="88" height="88" />
+          <picture>
+            <source type="image/webp" srcset="images/opt/cs2.webp 1x, images/opt/cs2@2x.webp 2x">
+            <img src="images/opt/cs2.png" srcset="images/opt/cs2.png 1x, images/opt/cs2@2x.png 2x" alt="Capa do serviço CS:GO2" class="game-img" loading="lazy" width="88" height="88" />
+          </picture>
           <h3 data-i18n="game2_title">CS:GO2</h3>
           <p data-i18n="game2_text">Conteúdos e scripts para jogadores competitivos e criadores de conteúdo.</p>
           <div class="foot">
@@ -408,7 +417,10 @@ Um guia simples para pessoas reais começarem a ter controle hoje.</p>
         </div>
 
         <div class="card">
-          <img src="images/opt/blod.png" srcset="images/opt/blod.png 1x, images/opt/blod@2x.png 2x" alt="Blood Strike" class="game-img" loading="lazy" width="88" height="88" />
+          <picture>
+            <source type="image/webp" srcset="images/opt/blod.webp 1x, images/opt/blod@2x.webp 2x">
+            <img src="images/opt/blod.png" srcset="images/opt/blod.png 1x, images/opt/blod@2x.png 2x" alt="Capa do serviço Blood Strike" class="game-img" loading="lazy" width="88" height="88" />
+          </picture>
           <h3 data-i18n="game3_title">Blood Strike</h3>
           <p data-i18n="game3_text">Pacotes e ferramentas focadas em performance e monetização.</p>
 
@@ -436,7 +448,10 @@ Um guia simples para pessoas reais começarem a ter controle hoje.</p>
         </div>
 
         <div class="card">
-          <img src="images/opt/far.png" srcset="images/opt/far.png 1x, images/opt/far@2x.png 2x" alt="Farlight 84" class="game-img" loading="lazy" width="88" height="88" />
+          <picture>
+            <source type="image/webp" srcset="images/opt/far.webp 1x, images/opt/far@2x.webp 2x">
+            <img src="images/opt/far.png" srcset="images/opt/far.png 1x, images/opt/far@2x.png 2x" alt="Capa do serviço Farlight 84" class="game-img" loading="lazy" width="88" height="88" />
+          </picture>
           <h3 data-i18n="game4_title">Farlight 84</h3>
           <p data-i18n="game4_text">Kits e ferramentas para performance e monetização em servidores e streams.</p>
 
